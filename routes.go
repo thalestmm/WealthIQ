@@ -54,6 +54,26 @@ func SetupRoutes(app *fiber.App) {
 			"title": "CDB Comparison",
 		})
 	})
+	app.Post("/cdb", func(c *fiber.Ctx) error {
+		r := new(CDBCompRequest)
+		if err := c.BodyParser(r); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": err,
+			})
+		}
+		trueCDBRate, err := realCdbRate(r.BaseCDBRate, r.DurationMonths)
+		if err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": err,
+			})
+		}
+		return c.Render("partials/cdb_result", fiber.Map{
+			"TrueCDBRate": fmt.Sprintf("%.2f", trueCDBRate),
+			"DiffPct":     fmt.Sprintf("%.2f", trueCDBRate/r.LCIRate),
+		})
+	})
+
+	// SHOPPING INFORMATION
 	app.Get("/shopping", func(c *fiber.Ctx) error {
 		return c.Render("shopping", fiber.Map{
 			"title": "Shopping Info",

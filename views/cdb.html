@@ -7,6 +7,35 @@
 <main class="container-fluid">
     {{ template "partials/navbar" . }}
     <br>
+    <h1>CDB Comparison</h1>
+    <hr>
+    <form hx-post="/cdb" hx-target="#result" hx-swap="outerHTML">
+        <fieldset>
+            <label>
+                CDB (% CDI)
+                <input
+                        name="cdb_value"
+                        placeholder="XX.XX %"
+                />
+            </label>
+            <label>
+                LCI/LCA (% CDI)
+                <input
+                        name="lci_value"
+                        placeholder="XX.XX %"
+                />
+            </label>
+            <label>
+                Duration (months)
+                <input
+                        name="duration_months"
+                        placeholder="XX"
+                />
+            </label>
+        </fieldset>
+        <input type="submit" value="Compare" />
+    </form>
+    <div id="result"></div>
 </main>
 </body>
 </html>
