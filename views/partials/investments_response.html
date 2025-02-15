@@ -1,0 +1,38 @@
+    <div id="result">
+    <h3>Simulation</h3>
+    <table class="striped">
+        <tr>
+            <th><b>Base Value</b></th>
+            <th>$ {{.BaseValue}}</th>
+        </tr>
+        <tr>
+            <th><b>Monthly Rate</b></th>
+            <th>{{.MonthlyRate}} %</th>
+        </tr>
+        <tr>
+            <th><b>Duration</b></th>
+            <th>{{.DurationMonths}} months</th>
+        </tr>
+        <tr>
+            <th><b>Taxes</b></th>
+            <th>{{.ApplyTax}}</th>
+        </tr>
+    </table>
+    <h3>Results</h3>
+    <table class="striped">
+        <thead>
+        <tr>
+            <th>Total Value</th>
+            <th>$ {{.TotalValue}}</th>
+        </tr>
+        </thead>
+        <tr>
+            <th>Earnings</th>
+            <th>$ {{.Earnings}}</th>
+        </tr>
+        <tr>
+            <th>Profit</th>
+            <th>{{.Profit}} %</th>
+        </tr>
+    </table>
+    </div>

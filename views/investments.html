@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {{ template "partials/head" . }}
+</head>
+<body>
+<main class="container-fluid">
+    {{template "partials/navbar" . }}
+    <br>
+    <h1>Investments</h1>
+    <hr>
+    <div id="parent-container">
+    <form  hx-post="/investments" hx-swap="outerHTML" hx-target="#parent-container">
+        <fieldset>
+            <label>
+                Base Value
+                <input
+                        name="base_value"
+                        placeholder="$ XXXX.XX"
+                />
+            </label>
+            <label>
+                Monthly Rate (%)
+                <input
+                        name="monthly_rate"
+                        placeholder="X.XX"
+                />
+            </label>
+            <label>
+                Duration (Months)
+                <input
+                        name="duration_months"
+                        placeholder="XX"
+                />
+            </label>
+            <label>
+                Apply Taxes
+                <input type="checkbox" name="apply_taxes" role="switch" checked/>
+            </label>
+        </fieldset>
+
+        <input
+                type="submit"
+                value="Submit"
+        />
+    </form>
+    </div>
+</main>
+</body>
+</html>
