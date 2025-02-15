@@ -54,7 +54,7 @@ func SetupRoutes(app *fiber.App) {
 			"title": "CDB Comparison",
 		})
 	})
-	app.Post("/cdb", func(c *fiber.Ctx) error {
+	app.Put("/cdb", func(c *fiber.Ctx) error {
 		r := new(CDBCompRequest)
 		if err := c.BodyParser(r); err != nil {
 			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
