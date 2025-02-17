@@ -7,6 +7,51 @@
 <main class="container-fluid">
     {{template "partials/navbar" . }}
     <br>
+    <h1>Shopping Simulation</h1>
+    <hr>
+    <form hx-post="/shopping" hx-swap="innerHTML" hx-target="#result">
+        <fieldset>
+            <label>
+                Base Price
+                <input
+                    name="base_value"
+                    placeholder="XXXX.XX"
+                />
+            </label>
+            <label>
+                # Installments
+                <input
+                        name="duration_months"
+                        placeholder="XX"
+                />
+            </label>
+            <label>
+                Estimated Investment Rate (%)
+                <input
+                name = "investment_rate"
+                placeholder="X.XX"
+                />
+            </label>
+            <label>
+                Offered Discount Percentage (%)
+                <input
+                        name="discount_pct"
+                        placeholder="XX.XX"
+                />
+            </label>
+            <label>
+                Apply Taxes
+                <input type="checkbox" name="apply_taxes" role="switch" checked/>
+            </label>
+        </fieldset>
+        <input
+                type="submit"
+                value="Calculate"
+        />
+    </form>
+    <div id="result" class="container-fluid">
+
+    </div>
 </main>
 </body>
 </html>

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
+	"log"
 )
 
 func SetupRoutes(app *fiber.App) {
@@ -78,5 +79,46 @@ func SetupRoutes(app *fiber.App) {
 		return c.Render("shopping", fiber.Map{
 			"title": "Shopping Info",
 		})
+	})
+	app.Post("/shopping", func(c *fiber.Ctx) error {
+		sr := new(ShoppingRequest)
+		if err := c.BodyParser(sr); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": err,
+			})
+		}
+		discountedValue := sr.BaseValue * sr.DiscountPct / 100.0
+		// Suppose the user invests the difference money for the whole period
+		diffTotal, err := simulateInvestment(
+			sr.BaseValue*sr.DiscountPct/100.0, sr.DurationMonths, sr.InvestmentRate/100.0, sr.ApplyTax)
+		if err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": err,
+			})
+		}
+		log.Printf("earnings from investing the difference: %.2f", diffTotal-discountedValue)
+		log.Printf("total value saves by paying in full: %.2f", diffTotal)
+		totalEarnings, err := simulateInvestmentWithPayments(
+			sr.BaseValue, sr.DurationMonths, sr.InvestmentRate/100.0, sr.ApplyTax)
+		if err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": err,
+			})
+		}
+		log.Printf("earnings from paying in installments: %.2f", totalEarnings)
+		diff := totalEarnings - diffTotal
+		if diff >= 0 {
+			return c.Render("partials/shopping_response", fiber.Map{
+				"Message": "It's best to pay in installments.",
+				"Value":   fmt.Sprintf("%.2f", totalEarnings),
+				"Diff":    fmt.Sprintf("%.2f", diff),
+			})
+		} else {
+			return c.Render("partials/shopping_response", fiber.Map{
+				"Message": "It's best to pay in full up front.",
+				"Value":   fmt.Sprintf("%.2f", totalEarnings),
+				"Diff":    fmt.Sprintf("%.2f", diff*(-1.0)),
+			})
+		}
 	})
 }
