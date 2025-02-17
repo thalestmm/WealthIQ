@@ -13,7 +13,6 @@ type ShoppingRequest struct {
 	ApplyTax       bool    `json:"apply_tax" xml:"apply_tax" form:"apply_tax"`
 }
 
-// TODO: Suppose you invest the discounted money up front for the whole duration
 func simulateInvestmentWithPayments(baseValue float64, durationMonths int, rate float64, applyTax bool) (float64, error) {
 	total := baseValue
 	for i := 0; i < durationMonths; i++ {
