@@ -4,10 +4,29 @@
     {{ template "partials/head" . }}
 </head>
 <body>
-    <main class="container-fluid">
-        {{template "partials/navbar" . }}
+    <main class="container-fluid" style="max-width: 30em">
         <br>
         <h1>{{.title}}</h1>
+        <hr><br>
+        <details>
+            <summary><a href="./investments">Investment Simulation</a></summary>
+            <p>Run simulations from diverse fixed income scenarios.</p>
+        </details>
+
+        <hr />
+
+        <details>
+            <summary><a href="./cdb">CDB Comparison</a></summary>
+            <p>Compare CDB and LCI/LCA products to determine the bigger true investment rate on each.</p>
+        </details>
+
+        <hr />
+
+        <details>
+            <summary><a href="./shopping">Shopping Information</a></summary>
+            <p>Run simulations to decide wether it's best to buy a product in full for a discount or pay
+                in multiple installments and invest the difference.</p>
+        </details>
     </main>
 </body>
 </html>
