@@ -7,11 +7,13 @@ import (
 )
 
 func SetupRoutes(app *fiber.App) {
+	// INDEX
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.Render("index", fiber.Map{
 			"title": "Finances",
 		})
 	})
+
 	// INVESTMENT SIMULATION
 	app.Get("/investments", func(c *fiber.Ctx) error {
 		return c.Render("investments", fiber.Map{
