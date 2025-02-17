@@ -1,10 +1,5 @@
 package main
 
-import (
-	"fmt"
-	"log"
-)
-
 type ShoppingRequest struct {
 	BaseValue      float64 `json:"base_value" xml:"base_value" form:"base_value"`
 	DurationMonths int     `json:"duration_months" xml:"duration_months" form:"duration_months"`
@@ -27,20 +22,5 @@ func simulateInvestmentWithPayments(baseValue float64, durationMonths int, rate 
 		return taxedTotal, nil
 	} else {
 		return total, nil
-	}
-}
-
-func compareDiscountToInvestment(baseValue float64, discountPct float64,
-	durationMonths int, monthlyRate float64, applyTax bool) {
-	investmentTotal, err := simulateInvestmentWithPayments(baseValue, durationMonths, monthlyRate, applyTax)
-	if err != nil {
-		log.Fatal(err)
-	}
-	discountedValue := (1 - discountPct/100.0) * baseValue
-	diff := baseValue - discountedValue
-	if investmentTotal > diff {
-		fmt.Printf("It's better to invest by $%.2f \n", investmentTotal-diff)
-	} else {
-		fmt.Printf("Buy it with the discount, you'll save %.2f \n", diff-investmentTotal)
 	}
 }
