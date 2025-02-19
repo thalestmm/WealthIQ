@@ -124,7 +124,7 @@ func SetupRoutes(app *fiber.App) {
 		}
 	})
 
-	// CALCULATIONS
+	// CALCULATORS
 	app.Get("/calc", func(c *fiber.Ctx) error {
 		return c.Render("calc", fiber.Map{
 			"title": "Calculations",
