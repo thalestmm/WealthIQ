@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {{ template "partials/head" . }}
+    <style>
+        .input-box {
+            flex: 1;
+            padding: 0.15em;
+            width: 50%;
+            border-radius: 5px;
+            text-align: center;
+            margin:auto;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<main class="container-fluid" style="max-width: 30em">
+    {{template "partials/navbar" . }}
+    <br>
+    <h1>Calculators</h1>
+    <hr>
+    <h3>Annual to Monthly Rate</h3>
+    <form hx-put="/calc/annual-to-monthly" hx-swap="outerHTML" hx-target="#res1">
+        <fieldset role="group" class="input-group">
+            <div class="input-box">
+                <input class="input-box"
+                        name="value"
+                        placeholder="Annual Rate (%)"
+                />
+            </div>
+            <div class="input-box">
+                <input class="input-box" id="res1" disabled>
+            </div>
+        </fieldset>
+        <input
+                type="submit"
+                value="Calculate"
+        />
+    </form>
+    <hr>
+    <h3>Monthly to Annual Rate</h3>
+    <form hx-put="/calc/monthly-to-annual" hx-swap="outerHTML" hx-target="#res2">
+        <fieldset role="group" class="input-group">
+            <div class="input-box">
+                <input class="input-box"
+                       name="value"
+                       placeholder="Monthly Rate (%)"
+                />
+            </div>
+            <div class="input-box">
+                <input class="input-box" id="res2" disabled>
+            </div>
+        </fieldset>
+        <input
+                type="submit"
+                value="Calculate"
+        />
+</main>
+</body>
+</html>

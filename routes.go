@@ -123,4 +123,37 @@ func SetupRoutes(app *fiber.App) {
 			})
 		}
 	})
+
+	// CALCULATIONS
+	app.Get("/calc", func(c *fiber.Ctx) error {
+		return c.Render("calc", fiber.Map{
+			"title": "Calculations",
+		})
+	})
+	app.Put("/calc/annual-to-monthly", func(c *fiber.Ctx) error {
+		// TODO: Implement calculation
+		cr := new(CalcRequest)
+		if err := c.BodyParser(cr); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": err,
+			})
+		}
+		result := monthlyRateFromAnnualRate(cr.Value / 100)
+		return c.Render("partials/calc_result_a_to_m", fiber.Map{
+			"value": fmt.Sprintf("%.3f %s", result*100, "%"),
+		})
+	})
+	app.Put("/calc/monthly-to-annual", func(c *fiber.Ctx) error {
+		// TODO: Implement calculation
+		cr := new(CalcRequest)
+		if err := c.BodyParser(cr); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": err,
+			})
+		}
+		result := annualRateFromMonthlyRate(cr.Value / 100)
+		return c.Render("partials/calc_result_m_to_a", fiber.Map{
+			"value": fmt.Sprintf("%.3f %s", result*100, "%"),
+		})
+	})
 }
