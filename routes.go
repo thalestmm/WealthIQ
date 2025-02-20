@@ -10,7 +10,7 @@ func SetupRoutes(app *fiber.App) {
 	// INDEX
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.Render("index", fiber.Map{
-			"title": "Finances",
+			"title": "WealthIQ",
 		})
 	})
 
@@ -127,7 +127,7 @@ func SetupRoutes(app *fiber.App) {
 	// CALCULATORS
 	app.Get("/calc", func(c *fiber.Ctx) error {
 		return c.Render("calc", fiber.Map{
-			"title": "Calculations",
+			"title": "Calculators",
 		})
 	})
 	app.Put("/calc/annual-to-monthly", func(c *fiber.Ctx) error {
