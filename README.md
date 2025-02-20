@@ -1,4 +1,4 @@
-# Finances
+# WealthIQ
 
 Personal web app with multiple tools to make financial decisions at any time you might need.
 
