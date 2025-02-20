@@ -6,6 +6,7 @@ Tech Stack:
 - Go Fiber
 - Go HTML template engine
 - HTMX
+- Pico CSS
 
 We're live! [Visit us](https://finances-sa0f.onrender.com/).
 
